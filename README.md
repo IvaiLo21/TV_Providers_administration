@@ -1,3 +1,2 @@
-# proj
-sapproj
-this is my first try on doing a repo :) 
+# TV_Providers_project
+Attempting to code a DB + JAVA application for TV channels providers.
