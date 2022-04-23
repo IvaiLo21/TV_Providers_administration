@@ -22,16 +22,16 @@ CREATE TABLE channels (
     channel_cost DOUBLE
 );
 
-CREATE TABLE channel_category (
+CREATE TABLE channel_package (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     channel_category ENUM('terrestrial', 'sports', 'sci-fi', 'films', 'music', 'for children', 'others'),
     channel_package_cost DOUBLE,
     
-    channel_category_id INT NOT NULL UNIQUE,
-    CONSTRAINT FOREIGN KEY (channel_category_id)
+    channel_package_id INT NOT NULL UNIQUE,
+    CONSTRAINT FOREIGN KEY (channel_package_id)
         REFERENCES channels (id),
         
-    UNIQUE KEY (channel_category_id , channel_category , channel_package_cost)
+   UNIQUE KEY (channel_package_id , channel_category , channel_package_cost)
 );
 
 CREATE TABLE contracts (
@@ -55,7 +55,7 @@ CREATE TABLE taxes (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     monthly_paid DOUBLE,
     
-    customer_taxes DOUBLE NOT NULL,
+    customer_taxes INT NOT NULL,
     CONSTRAINT FOREIGN KEY (customer_taxes)
         REFERENCES customers (id),
         
