@@ -5,15 +5,17 @@ USE TV_Provider_administration;
 CREATE TABLE providers (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name_of_provider VARCHAR(255) NOT NULL,
+    provider_pass INT(8) UNIQUE DEFAULT NULL,
     service_cost DOUBLE,
-    contract_number VARCHAR(12) NOT NULL UNIQUE,
-    contract_expiry DATE NOT NULL
+    contract_number VARCHAR(15) NOT NULL UNIQUE,
+    contract_expiry DATE
 );
 
 CREATE TABLE customers (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     customer_name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL
+    customer_pass INT(12) UNIQUE DEFAULT NULL,
+    address VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE channels (
@@ -29,9 +31,9 @@ CREATE TABLE channel_package (
     
     channel_package_id INT NOT NULL UNIQUE,
     CONSTRAINT FOREIGN KEY (channel_package_id)
-        REFERENCES channels (id),
+        REFERENCES channels (id)
         
-   UNIQUE KEY (channel_package_id , channel_category , channel_package_cost)
+  -- UNIQUE KEY (channel_package_id , channel_category , channel_package_cost)
 );
 
 CREATE TABLE contracts (
@@ -53,11 +55,11 @@ CREATE TABLE contracts (
 
 CREATE TABLE taxes (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    monthly_paid DOUBLE,
+    monthly_paid DOUBLE ,
     
     customer_taxes INT NOT NULL,
     CONSTRAINT FOREIGN KEY (customer_taxes)
-        REFERENCES customers (id),
+        REFERENCES customers (id)
         
-    UNIQUE KEY (monthly_paid , customer_taxes)
+ -- UNIQUE KEY (monthly_paid , customer_taxes)
 );
