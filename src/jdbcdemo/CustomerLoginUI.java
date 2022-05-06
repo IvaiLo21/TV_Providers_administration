@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -79,16 +79,9 @@ public class CustomerLoginUI extends JFrame {
 				@SuppressWarnings("deprecation")
 				String passWord = passwordField.getText();
 				try {
-					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
-
-					PreparedStatement st = connection.prepareStatement(
-							"Select customer_name, customer_pass from customers where customer_name=? and customer_pass=?");
-
-					st.setString(1, userName);
-					st.setString(2, passWord);
-					ResultSet rs = st.executeQuery();
-					if (rs.next()) {
+					JdbcCustomerServices service = new JdbcCustomerServices();
+					service.jdbcLoginServices(userName, passWord);
+					if (JdbcCustomerServices.isTrue != false) {
 						dispose();
 						CustomerHomeUI ah = new CustomerHomeUI(userName);
 						ah.setTitle("Welcome" + " " + userName);

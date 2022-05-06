@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -46,15 +46,9 @@ public class CustomerNameChanger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String pstr = textField.getText();
-					Connection con = (Connection) DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
-
-					PreparedStatement st = (PreparedStatement) con
-							.prepareStatement("Update customers set customer_name=? where customer_name=?");
-
-					st.setString(1, pstr);
-					st.setString(2, name);
-					st.executeUpdate();
+					
+					JdbcCustomerServices service = new JdbcCustomerServices();
+					service.jdbcUsernameServices(pstr, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Name has been successfully changed");
 					System.out.println("update customer name of " + name);

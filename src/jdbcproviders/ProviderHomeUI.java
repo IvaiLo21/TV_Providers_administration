@@ -70,7 +70,7 @@ public class ProviderHomeUI extends JFrame {
 		btnIncrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnIncrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				P_CostChanger b = new P_CostChanger(userSes1, true);
+				ProviderIncDcr b = new ProviderIncDcr(userSes1, true);
 				b.setTitle("Increase Service Cost");
 				b.setVisible(true);
 
@@ -85,7 +85,7 @@ public class ProviderHomeUI extends JFrame {
 		btnDecrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnDecrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				P_CostChanger c = new P_CostChanger(userSes1, false);
+				ProviderIncDcr c = new ProviderIncDcr(userSes1, false);
 				c.setTitle("Decrease Service Cost");
 				c.setVisible(true);
 

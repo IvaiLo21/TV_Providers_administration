@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -46,17 +46,11 @@ public class ProviderServiceChanger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String pstr = textField.getText();
-					Connection con = (Connection) DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
+					
+					JdbcProviderServices service = new JdbcProviderServices();
+					service.jdbcCostServices(pstr, name);
 
-					PreparedStatement st = (PreparedStatement) con
-							.prepareStatement("Update providers set service_cost=? where name_of_provider=?");
-
-					st.setString(1, pstr);
-					st.setString(2, name);
-					st.executeUpdate();
-
-					JOptionPane.showMessageDialog(btnSearch, "The Cost has been successfully changed");
+					JOptionPane.showMessageDialog(btnSearch, "The Service Cost has been successfully changed");
 					System.out.println("update service cost of " + name);
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();

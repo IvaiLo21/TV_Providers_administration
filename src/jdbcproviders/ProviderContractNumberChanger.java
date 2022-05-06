@@ -5,12 +5,11 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,31 +43,24 @@ public class ProviderContractNumberChanger extends JFrame {
 		JButton btnSearch = new JButton("Enter");
 
 		btnSearch.addActionListener(new ActionListener() {
-			boolean exists = false;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String pstr = textField.getText();
-					Connection con = (Connection) DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
 
-					PreparedStatement st = (PreparedStatement) con
-							.prepareStatement("Update providers set contract_number=? where name_of_provider=?");
-					try {
-						st.setString(1, pstr);
-						st.setString(2, name);
-					} catch (SQLIntegrityConstraintViolationException Excp) {
+					JdbcProviderServices service = new JdbcProviderServices();
+					service.jdbcCntrNumbServices(pstr, name);
+
+					if (JdbcProviderServices.isTrue == false) {
+						JOptionPane.showMessageDialog(btnSearch, "Contract Number has been successfully changed");
+						System.out.println("Update Contract Number of " + name);
+					} else {
 						Component frame = null;
-						exists = true;
-						JOptionPane.showMessageDialog(frame, "Found " + Excp.getMessage(), "Error",
+						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",
 								JOptionPane.ERROR_MESSAGE);
+						JdbcProviderServices.isTrue = false;
 					}
-					if (exists != true)
-						st.executeUpdate();
 
-					JOptionPane.showMessageDialog(btnSearch, "Contract Number has been successfully changed");
-					System.out.println("Update Contract Number of " + name);
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

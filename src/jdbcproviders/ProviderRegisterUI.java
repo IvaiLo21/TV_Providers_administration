@@ -5,11 +5,14 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.SQLIntegrityConstraintViolationException;
+//import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+
 
 import javax.swing.SwingConstants;
 
@@ -104,44 +107,32 @@ public class ProviderRegisterUI extends JFrame {
 				String userName = UsertextField.getText();
 				@SuppressWarnings("deprecation")
 				String passWord = passwordField.getText();
-				String service = ServicetextField.getText();
+				String serviceC = ServicetextField.getText();
 				String number = NumbertextField.getText();
 				String date = DatetextField.getText();
-				boolean exists = false;
-				boolean dateC = false;
 				try {
-					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
 
-					PreparedStatement st = connection.prepareStatement("insert into providers"
-							+ "(name_of_provider,provider_pass,service_cost,contract_number,contract_expiry)"
-							+ " values (?,?,?,?,?)");
-					try {
-						st.setString(1, userName);
-						st.setString(2, passWord);
-						st.setString(3, service);
-						st.setString(4, number);
-						st.setString(5, date);
-						st.executeUpdate();
-					} catch (SQLIntegrityConstraintViolationException Excp) {
-						Component frame = null;
-						exists = true;
-						JOptionPane.showMessageDialog(frame, "Found " + Excp.getMessage(), "Error",
-								JOptionPane.ERROR_MESSAGE);
-					} catch (MysqlDataTruncation DateExcp) {
-						Component frame = null;
-						dateC = true;
-						JOptionPane.showMessageDialog(frame, DateExcp.getMessage() + "Should be like this : YY-MM-DD", "Error",
-								JOptionPane.ERROR_MESSAGE);
-					}
-					
-					if (exists != true && dateC != true) {
+					Component frame = null;
+					JdbcProviderServices service = new JdbcProviderServices();
+					service.jdbcProviderRegistrationServices(userName, passWord, serviceC, number, date);
+
+					if (JdbcProviderServices.exists != true && JdbcProviderServices.dateC != true) {
 						dispose();
 						ProviderHomeUI ah = new ProviderHomeUI(userName);
 						ah.setTitle("Welcome" + " " + userName);
 						ah.setVisible(true);
 						JOptionPane.showMessageDialog(MainMenuBtn, "You successfully registered");
+					} else if (JdbcProviderServices.exists == true) {
+						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",
+								JOptionPane.ERROR_MESSAGE);
+						JdbcProviderServices.exists = false;
+					} else if (JdbcProviderServices.dateC == true) {
+						JOptionPane.showMessageDialog(frame,
+								JdbcProviderServices.msg + " Should be like this : YY-MM-DD", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						JdbcProviderServices.dateC = false;
 					}
+
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

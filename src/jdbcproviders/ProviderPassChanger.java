@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -24,7 +24,7 @@ public class ProviderPassChanger extends JFrame {
 	private JTextField textField;
 	private JLabel lblEnterNewPassword;
 
-	public ProviderPassChanger(String name1) {
+	public ProviderPassChanger(String name) {
 		setBounds(450, 360, 1024, 234);
 		setResizable(false);
 
@@ -47,15 +47,9 @@ public class ProviderPassChanger extends JFrame {
 
 				try {
 					String pstr = textField.getText();
-					Connection con = (Connection) DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
-
-					PreparedStatement st1 = (PreparedStatement) con
-							.prepareStatement("Update providers set provider_pass=? where name_of_provider=?");
-
-					st1.setString(1, pstr);
-					st1.setString(2, name1);
-					st1.executeUpdate();
+					
+					JdbcProviderServices service = new JdbcProviderServices();
+					service.jdbcPassServices(pstr, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Password has been successfully changed");
 

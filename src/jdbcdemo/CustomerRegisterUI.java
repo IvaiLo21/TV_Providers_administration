@@ -5,12 +5,11 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,32 +99,25 @@ public class CustomerRegisterUI extends JFrame {
 				@SuppressWarnings("deprecation")
 				String passWord = passwordField.getText();
 				String address = AddresstextField.getText();
-				boolean exists = false;
 
 				try {
-					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
 
-					PreparedStatement st = connection.prepareStatement(
-							"insert into customers" + "(customer_name, customer_pass, address)" + " values (?, ?, ?)");
-					try {
-						st.setString(1, userName);
-						st.setString(2, passWord);
-						st.setString(3, address);
-						st.executeUpdate();
-					} catch (SQLIntegrityConstraintViolationException Excp) {
-						Component frame = null;
-						exists = true;
-						JOptionPane.showMessageDialog(frame, "Found " + Excp.getMessage(), "Error",
-								JOptionPane.ERROR_MESSAGE);
-					}
+					JdbcCustomerServices service = new JdbcCustomerServices();
+					service.jdbcCustomerRegistrationServices(userName, passWord, address);
 
-					if (exists != true) {
+					if (JdbcCustomerServices.isTrue == false) {
+
 						dispose();
 						CustomerHomeUI ah = new CustomerHomeUI(userName);
 						ah.setTitle("Welcome" + " " + userName);
 						ah.setVisible(true);
 						JOptionPane.showMessageDialog(MainMenuBtn, "You successfully registered");
+						
+					} else {
+						Component frame = null;
+						JOptionPane.showMessageDialog(frame, "Found " + JdbcCustomerServices.msg, "Error",
+								JOptionPane.ERROR_MESSAGE);
+						JdbcCustomerServices.isTrue = false;
 					}
 
 				} catch (SQLException sqlException) {
