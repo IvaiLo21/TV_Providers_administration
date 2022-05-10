@@ -36,9 +36,9 @@ public class CustomerHomeUI extends JFrame {
 		LogoutBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		LogoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				int a = JOptionPane.showConfirmDialog(LogoutBtn, "Are you sure?");
-				if (a == JOptionPane.YES_OPTION) {
+
+				int action = JOptionPane.showConfirmDialog(LogoutBtn, "Are you sure?");
+				if (action == JOptionPane.YES_OPTION) {
 					dispose();
 					CustomerLoginUI obj = new CustomerLoginUI();
 					obj.setTitle("Customer Login");
@@ -54,9 +54,9 @@ public class CustomerHomeUI extends JFrame {
 		ChngUserBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		ChngUserBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CustomerNameChanger c = new CustomerNameChanger(userSes);
-				c.setTitle("Change Username");
-				c.setVisible(true);
+				CustomerNameChanger obj = new CustomerNameChanger(userSes);
+				obj.setTitle("Change Username");
+				obj.setVisible(true);
 
 			}
 		});
@@ -70,9 +70,9 @@ public class CustomerHomeUI extends JFrame {
 		CPassBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		CPassBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CustomerPassChanger a = new CustomerPassChanger(userSes);
-				a.setTitle("Change Password");
-				a.setVisible(true);
+				CustomerPassChanger obj = new CustomerPassChanger(userSes);
+				obj.setTitle("Change Password");
+				obj.setVisible(true);
 
 			}
 		});
@@ -85,9 +85,9 @@ public class CustomerHomeUI extends JFrame {
 		ChngAddressBtn.setBackground(UIManager.getColor("Button.background"));
 		ChngAddressBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CustomerAddressChanger b = new CustomerAddressChanger(userSes);
-				b.setTitle("Change Address");
-				b.setVisible(true);
+				CustomerAddressChanger obj = new CustomerAddressChanger(userSes);
+				obj.setTitle("Change Address");
+				obj.setVisible(true);
 
 			}
 		});
@@ -109,7 +109,7 @@ public class CustomerHomeUI extends JFrame {
 		btnChooseProvider.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnChooseProvider.setBounds(675, 260, 315, 88);
 		contentPane.add(btnChooseProvider);
-		
+
 		JLabel lblNewLabel = new JLabel("Customer Home Page");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));

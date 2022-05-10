@@ -5,11 +5,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -99,29 +96,30 @@ public class CustomerRegisterUI extends JFrame {
 				@SuppressWarnings("deprecation")
 				String passWord = passwordField.getText();
 				String address = AddresstextField.getText();
-
 				try {
 
 					JdbcCustomerServices service = new JdbcCustomerServices();
-					service.jdbcCustomerRegistrationServices(userName, passWord, address);
+					service.jdbcCustomerReg(userName, passWord, address);
 
-					if (JdbcCustomerServices.isTrue == false) {
+					if (service.check == true) {
 
 						dispose();
-						CustomerHomeUI ah = new CustomerHomeUI(userName);
-						ah.setTitle("Welcome" + " " + userName);
-						ah.setVisible(true);
+						CustomerHomeUI obj = new CustomerHomeUI(userName);
+						obj.setTitle("Welcome" + " " + userName);
+						obj.setVisible(true);
 						JOptionPane.showMessageDialog(MainMenuBtn, "You successfully registered");
-						
+
 					} else {
 						Component frame = null;
 						JOptionPane.showMessageDialog(frame, "Found " + JdbcCustomerServices.msg, "Error",
 								JOptionPane.ERROR_MESSAGE);
-						JdbcCustomerServices.isTrue = false;
+						service.check = false;
 					}
 
 				} catch (SQLException sqlException) {
-					sqlException.printStackTrace();
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame, sqlException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE,
+							null);
 				}
 			}
 		});
@@ -136,9 +134,9 @@ public class CustomerRegisterUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				CustomerLoginUI c = new CustomerLoginUI();
-				c.setTitle("Welcome back to the Login Menu");
-				c.setVisible(true);
+				CustomerLoginUI obj = new CustomerLoginUI();
+				obj.setTitle("Welcome back to the Login Menu");
+				obj.setVisible(true);
 			}
 		});
 		LoginBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -151,9 +149,9 @@ public class CustomerRegisterUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				driverdemo.Login d = new driverdemo.Login();
-				d.setTitle("Welcome back to the main menu");
-				d.setVisible(true);
+				driverdemo.Login obj = new driverdemo.Login();
+				obj.setTitle("Welcome back to the main menu");
+				obj.setVisible(true);
 			}
 		});
 		MainMenuBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));

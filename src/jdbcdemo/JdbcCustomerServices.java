@@ -3,56 +3,56 @@ package jdbcdemo;
 import java.sql.*;
 
 public class JdbcCustomerServices {
-	
+
 	static String msg = null;
-	static boolean isTrue = false;
-	
-	//Connection properties
+	protected boolean check;
+
+	// Connection properties
 	String burl = "jdbc:mysql://localhost:3306/tv_provider_administration";
 	String user = "root";
 	String pass = "student1";
 
 	// CustomerAddressUpdater
-	public void jdbcAddressUpdateService(String pstr, String name) throws SQLException {
+	public void jdbcAddressUpdateService(String input, String name) throws SQLException {
 
 		Connection con = (Connection) DriverManager.getConnection(burl, user, pass);
 
 		PreparedStatement st = (PreparedStatement) con
 				.prepareStatement("Update customers set address=? where customer_name=?");
 
-		st.setString(1, pstr);
+		st.setString(1, input);
 		st.setString(2, name);
 		st.executeUpdate();
 	}
 
 	// CustomerUsernameUpdater
-	public void jdbcUsernameServices(String pstr, String name) throws SQLException {
+	public void jdbcUsernameServices(String input, String name) throws SQLException {
 
 		Connection con = (Connection) DriverManager.getConnection(burl, user, pass);
 
 		PreparedStatement st = (PreparedStatement) con
 				.prepareStatement("Update customers set customer_name=? where customer_name=?");
 
-		st.setString(1, pstr);
+		st.setString(1, input);
 		st.setString(2, name);
 		st.executeUpdate();
 	}
 
 	// CustomerPasswordChanger
-	public void jdbcPasswordServices(String pstr, String name) throws SQLException {
+	public void jdbcPasswordServices(String input, String name) throws SQLException {
 
 		Connection con = (Connection) DriverManager.getConnection(burl, user, pass);
 
 		PreparedStatement st = (PreparedStatement) con
 				.prepareStatement("Update customers set customer_pass=? where customer_name=?");
 
-		st.setString(1, pstr);
+		st.setString(1, input);
 		st.setString(2, name);
 		st.executeUpdate();
 	}
 
 	// CustomerLoginServices
-	public void jdbcLoginServices(String userName, String passWord) throws SQLException {
+	public boolean jdbcCustomerLog(String userName, String passWord) throws SQLException {
 
 		Connection con = (Connection) DriverManager.getConnection(burl, user, pass);
 
@@ -62,19 +62,21 @@ public class JdbcCustomerServices {
 		st.setString(1, userName);
 		st.setString(2, passWord);
 		ResultSet rs = st.executeQuery();
+
 		if (rs.next()) {
-			isTrue = true;
-		}
+			return true;
+		} else
+			return false;
 	}
 
 	// CustomerRegistrationServices
-	public void jdbcCustomerRegistrationServices(String userName, String passWord, String address) throws SQLException{
-		
+	public boolean jdbcCustomerReg(String userName, String passWord, String address) throws SQLException {
+		check = true;
+
 		Connection con = (Connection) DriverManager.getConnection(burl, user, pass);
 
 		PreparedStatement st = con.prepareStatement(
 				"insert into customers" + "(customer_name, customer_pass, address)" + " values (?, ?, ?)");
-		
 		try {
 			st.setString(1, userName);
 			st.setString(2, passWord);
@@ -82,9 +84,9 @@ public class JdbcCustomerServices {
 			st.executeUpdate();
 		} catch (SQLIntegrityConstraintViolationException Excp) {
 			msg = Excp.getMessage();
-			isTrue = true;
-			}
+			check = false;
+		}
+		return check;
 	}
-	
-	
+
 }

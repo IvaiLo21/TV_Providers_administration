@@ -42,14 +42,14 @@ public class CustomerPassChanger extends JFrame {
 		JButton btnSearch = new JButton("Enter");
 
 		btnSearch.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
+					String input = textField.getText();
 
 					JdbcCustomerServices service = new JdbcCustomerServices();
-					service.jdbcPasswordServices(pstr, name);
+					service.jdbcPasswordServices(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Password has been successfully changed");
 					System.out.println("update customer_pass of " + name);

@@ -45,13 +45,14 @@ public class ProviderNameChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
-					
+					String input = textField.getText();
+
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcUsernameServices(pstr, name);
+					service.jdbcUsernameServices(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Name has been successfully changed");
 					System.out.println("update provider name of " + name);
+
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

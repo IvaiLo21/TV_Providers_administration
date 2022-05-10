@@ -44,11 +44,11 @@ public class ProviderIncDcr extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					String pstr = textField.getText();
-					
+					String input = textField.getText();
+
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcIncrDcrServices(pstr, name, b);
-					
+					service.jdbcIncrDcrServices(input, name, b);
+
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

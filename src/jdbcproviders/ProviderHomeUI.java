@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-
 public class ProviderHomeUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -55,9 +54,9 @@ public class ProviderHomeUI extends JFrame {
 		btnChngPassword.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnChngPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderPassChanger a = new ProviderPassChanger(userSes1);
-				a.setTitle("Change Password");
-				a.setVisible(true);
+				ProviderPassChanger obj = new ProviderPassChanger(userSes1);
+				obj.setTitle("Change Password");
+				obj.setVisible(true);
 
 			}
 		});
@@ -70,9 +69,9 @@ public class ProviderHomeUI extends JFrame {
 		btnIncrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnIncrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderIncDcr b = new ProviderIncDcr(userSes1, true);
-				b.setTitle("Increase Service Cost");
-				b.setVisible(true);
+				ProviderIncDcr obj = new ProviderIncDcr(userSes1, true);
+				obj.setTitle("Increase Service Cost");
+				obj.setVisible(true);
 
 			}
 		});
@@ -85,9 +84,9 @@ public class ProviderHomeUI extends JFrame {
 		btnDecrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnDecrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderIncDcr c = new ProviderIncDcr(userSes1, false);
-				c.setTitle("Decrease Service Cost");
-				c.setVisible(true);
+				ProviderIncDcr obj = new ProviderIncDcr(userSes1, false);
+				obj.setTitle("Decrease Service Cost");
+				obj.setVisible(true);
 
 			}
 		});
@@ -99,9 +98,9 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnChangeUsername = new JButton("Change Username");
 		btnChangeUsername.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderPassChanger d = new ProviderPassChanger(userSes1);
-				d.setTitle("Change Password");
-				d.setVisible(true);
+				ProviderNameChanger obj = new ProviderNameChanger(userSes1);
+				obj.setTitle("Change Username");
+				obj.setVisible(true);
 
 			}
 		});
@@ -114,9 +113,9 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnChangeaddSCost = new JButton("Change/Add Service Cost");
 		btnChangeaddSCost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderServiceChanger f = new ProviderServiceChanger(userSes1);
-				f.setTitle("Change/Add Service Cost");
-				f.setVisible(true);
+				ProviderServiceChanger obj = new ProviderServiceChanger(userSes1);
+				obj.setTitle("Change/Add Service Cost");
+				obj.setVisible(true);
 
 			}
 		});
@@ -129,9 +128,9 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnChangeaddContractNumber = new JButton("Change/Add Contract Number");
 		btnChangeaddContractNumber.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderContractNumberChanger j = new ProviderContractNumberChanger(userSes1);
-				j.setTitle("Change/Add Contract Number");
-				j.setVisible(true);
+				ProviderContractNumberChanger obj = new ProviderContractNumberChanger(userSes1);
+				obj.setTitle("Change/Add Contract Number");
+				obj.setVisible(true);
 
 			}
 		});
@@ -146,14 +145,14 @@ public class ProviderHomeUI extends JFrame {
 		lblPageLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblPageLabel.setBounds(10, 10, 980, 60);
 		contentPane.add(lblPageLabel);
-		
+
 		// CHANGE CONTRACT DATE
 		JButton btnChangeaddContractExpiry = new JButton("Change/Add Contract Expiry Date");
 		btnChangeaddContractExpiry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProviderExpiryDateChanger k = new ProviderExpiryDateChanger(userSes1);
-				k.setTitle("Change/Add Expiry Date");
-				k.setVisible(true);
+				ProviderExpiryDateChanger obj = new ProviderExpiryDateChanger(userSes1);
+				obj.setTitle("Change/Add Expiry Date");
+				obj.setVisible(true);
 
 			}
 		});

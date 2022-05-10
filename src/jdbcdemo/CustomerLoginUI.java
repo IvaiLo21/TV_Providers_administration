@@ -80,15 +80,15 @@ public class CustomerLoginUI extends JFrame {
 				String passWord = passwordField.getText();
 				try {
 					JdbcCustomerServices service = new JdbcCustomerServices();
-					service.jdbcLoginServices(userName, passWord);
-					if (JdbcCustomerServices.isTrue != false) {
+					service.jdbcCustomerLog(userName, passWord);
+					if (service.jdbcCustomerLog(userName, passWord) != false) {
 						dispose();
-						CustomerHomeUI ah = new CustomerHomeUI(userName);
-						ah.setTitle("Welcome" + " " + userName);
-						ah.setVisible(true);
+						CustomerHomeUI obj = new CustomerHomeUI(userName);
+						obj.setTitle("Welcome" + " " + userName);
+						obj.setVisible(true);
 						JOptionPane.showMessageDialog(LoginBtn, "You have successfully logged in as customer");
 					} else {
-						JOptionPane.showMessageDialog(LoginBtn, "Wrong Username & Password");
+						JOptionPane.showMessageDialog(LoginBtn, "Wrong Username or Password");
 					}
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
@@ -105,9 +105,9 @@ public class CustomerLoginUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				CustomerRegisterUI c = new CustomerRegisterUI();
-				c.setTitle("Welcome to registration");
-				c.setVisible(true);
+				CustomerRegisterUI obj = new CustomerRegisterUI();
+				obj.setTitle("Welcome to registration");
+				obj.setVisible(true);
 			}
 		});
 		RegisterBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -119,9 +119,9 @@ public class CustomerLoginUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				driverdemo.Login d = new driverdemo.Login();
-				d.setTitle("Welcome back to the main menu");
-				d.setVisible(true);
+				driverdemo.Login obj = new driverdemo.Login();
+				obj.setTitle("Welcome back to the main menu");
+				obj.setVisible(true);
 			}
 		});
 		MainMenuBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));

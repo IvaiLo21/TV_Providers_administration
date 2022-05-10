@@ -24,8 +24,6 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-
-
 import javax.swing.SwingConstants;
 
 public class ProviderRegisterUI extends JFrame {
@@ -114,23 +112,23 @@ public class ProviderRegisterUI extends JFrame {
 
 					Component frame = null;
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcProviderRegistrationServices(userName, passWord, serviceC, number, date);
+					service.jdbcProvRegister(userName, passWord, serviceC, number, date);
 
-					if (JdbcProviderServices.exists != true && JdbcProviderServices.dateC != true) {
+					if (service.exists != true && service.dateC != true) {
 						dispose();
-						ProviderHomeUI ah = new ProviderHomeUI(userName);
-						ah.setTitle("Welcome" + " " + userName);
-						ah.setVisible(true);
+						ProviderHomeUI obj = new ProviderHomeUI(userName);
+						obj.setTitle("Welcome" + " " + userName);
+						obj.setVisible(true);
 						JOptionPane.showMessageDialog(MainMenuBtn, "You successfully registered");
-					} else if (JdbcProviderServices.exists == true) {
+					} else if (service.exists == true) {
 						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",
 								JOptionPane.ERROR_MESSAGE);
-						JdbcProviderServices.exists = false;
-					} else if (JdbcProviderServices.dateC == true) {
+						service.exists = false;
+					} else if (service.dateC == true) {
 						JOptionPane.showMessageDialog(frame,
 								JdbcProviderServices.msg + " Should be like this : YY-MM-DD", "Error",
 								JOptionPane.ERROR_MESSAGE);
-						JdbcProviderServices.dateC = false;
+						service.dateC = false;
 					}
 
 				} catch (SQLException sqlException) {
@@ -148,9 +146,9 @@ public class ProviderRegisterUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				ProviderLoginUI b = new ProviderLoginUI();
-				b.setTitle("Welcome back to the Login Menu");
-				b.setVisible(true);
+				ProviderLoginUI obj = new ProviderLoginUI();
+				obj.setTitle("Welcome back to the Login Menu");
+				obj.setVisible(true);
 			}
 		});
 		LoginBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -163,9 +161,9 @@ public class ProviderRegisterUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				driverdemo.Login c = new driverdemo.Login();
-				c.setTitle("Welcome back to the main menu");
-				c.setVisible(true);
+				driverdemo.Login obj = new driverdemo.Login();
+				obj.setTitle("Welcome back to the main menu");
+				obj.setVisible(true);
 			}
 		});
 		MainMenuBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));

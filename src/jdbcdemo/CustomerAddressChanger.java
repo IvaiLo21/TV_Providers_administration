@@ -47,10 +47,10 @@ public class CustomerAddressChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
+					String input = textField.getText();
 
 					JdbcCustomerServices service = new JdbcCustomerServices();
-					service.jdbcAddressUpdateService(pstr, name);
+					service.jdbcAddressUpdateService(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Address has been successfully changed");
 					System.out.println("update customer address of " + name);

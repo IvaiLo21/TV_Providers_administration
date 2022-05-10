@@ -45,10 +45,10 @@ public class CustomerNameChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
-					
+					String input = textField.getText();
+
 					JdbcCustomerServices service = new JdbcCustomerServices();
-					service.jdbcUsernameServices(pstr, name);
+					service.jdbcUsernameServices(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Name has been successfully changed");
 					System.out.println("update customer name of " + name);

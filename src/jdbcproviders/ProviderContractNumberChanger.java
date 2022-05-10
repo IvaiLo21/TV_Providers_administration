@@ -46,19 +46,19 @@ public class ProviderContractNumberChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
+					String input = textField.getText();
 
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcCntrNumbServices(pstr, name);
+					service.jdbcCntrNumbServices(input, name);
 
-					if (JdbcProviderServices.isTrue == false) {
+					if (service.exists == false) {
 						JOptionPane.showMessageDialog(btnSearch, "Contract Number has been successfully changed");
 						System.out.println("Update Contract Number of " + name);
 					} else {
 						Component frame = null;
 						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",
 								JOptionPane.ERROR_MESSAGE);
-						JdbcProviderServices.isTrue = false;
+						service.exists = false;
 					}
 
 				} catch (SQLException sqlException) {
@@ -72,7 +72,7 @@ public class ProviderContractNumberChanger extends JFrame {
 		btnSearch.setBounds(438, 127, 170, 59);
 		contentPane.add(btnSearch);
 
-		lblContrDetails = new JLabel("Enter New Contract Number(15):");
+		lblContrDetails = new JLabel("Enter New Contract Number(12):");
 		lblContrDetails.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblContrDetails.setBounds(45, 37, 461, 67);
 		contentPane.add(lblContrDetails);

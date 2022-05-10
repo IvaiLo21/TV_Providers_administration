@@ -1,7 +1,7 @@
 package jdbcproviders;
 
 import java.awt.Color;
-
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 public class ProviderExpiryDateChanger extends JFrame {
 
@@ -47,13 +49,18 @@ public class ProviderExpiryDateChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
-					
+					String input = textField.getText();
+
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcEDateServices(pstr, name);
+					service.jdbcEDateServices(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "Contract Date has been successfully changed");
 					System.out.println("Update Contract Expiry Date of " + name);
+
+				} catch (MysqlDataTruncation Excp) {
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame, Excp.getMessage() + " Should be like this : YY-MM-DD", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

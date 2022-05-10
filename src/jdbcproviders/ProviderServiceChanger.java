@@ -45,10 +45,10 @@ public class ProviderServiceChanger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String pstr = textField.getText();
-					
+					String input = textField.getText();
+
 					JdbcProviderServices service = new JdbcProviderServices();
-					service.jdbcCostServices(pstr, name);
+					service.jdbcCostServices(input, name);
 
 					JOptionPane.showMessageDialog(btnSearch, "The Service Cost has been successfully changed");
 					System.out.println("update service cost of " + name);

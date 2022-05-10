@@ -53,9 +53,9 @@ public class Login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				jdbcdemo.CustomerLoginUI a = new jdbcdemo.CustomerLoginUI();
-				a.setTitle("Welcome Customer");
-				a.setVisible(true);
+				jdbcdemo.CustomerLoginUI obj = new jdbcdemo.CustomerLoginUI();
+				obj.setTitle("Welcome Customer");
+				obj.setVisible(true);
 				JOptionPane.showMessageDialog(CLoginButton, "You have successfully choosen to log as a Customer");
 			}
 		});
@@ -70,9 +70,9 @@ public class Login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				jdbcproviders.ProviderLoginUI b = new jdbcproviders.ProviderLoginUI();
-				b.setTitle("Welcome Admin");
-				b.setVisible(true);
+				jdbcproviders.ProviderLoginUI obj = new jdbcproviders.ProviderLoginUI();
+				obj.setTitle("Welcome Admin");
+				obj.setVisible(true);
 				JOptionPane.showMessageDialog(PLoginBtn, "You have successfully choosen to log as an Admin");
 			}
 		});
@@ -94,9 +94,9 @@ public class Login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				jdbcdemo.CustomerRegisterUI c = new jdbcdemo.CustomerRegisterUI();
-				c.setTitle("Welcome Customer");
-				c.setVisible(true);
+				jdbcdemo.CustomerRegisterUI obj = new jdbcdemo.CustomerRegisterUI();
+				obj.setTitle("Welcome Customer");
+				obj.setVisible(true);
 				JOptionPane.showMessageDialog(CRegisterButton,
 						"You have successfully choosen to register as a User/Customer");
 			}
@@ -111,9 +111,9 @@ public class Login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				jdbcproviders.ProviderRegisterUI a = new jdbcproviders.ProviderRegisterUI();
-				a.setTitle("Welcome Provider");
-				a.setVisible(true);
+				jdbcproviders.ProviderRegisterUI obj = new jdbcproviders.ProviderRegisterUI();
+				obj.setTitle("Welcome Provider");
+				obj.setVisible(true);
 				JOptionPane.showMessageDialog(PRegisterBtn,
 						"You have successfully choosen to register as a Admin/Provider");
 			}

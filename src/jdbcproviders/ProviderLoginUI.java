@@ -2,10 +2,10 @@ package jdbcproviders;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.Connection;
+/*import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.ResultSet;*/
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -16,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import jdbcdemo.CustomerRegisterUI;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,10 +31,10 @@ public class ProviderLoginUI extends JFrame {
 	private JPanel contentPane;
 
 	public ProviderLoginUI() {
+		setResizable(false);
 		setTitle("AdminLogin");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 190, 1014, 597);
-		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,24 +80,16 @@ public class ProviderLoginUI extends JFrame {
 				@SuppressWarnings("deprecation")
 				String passWord = passwordField.getText();
 				try {
-					Connection connection = (Connection) DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
-
-					PreparedStatement st = (PreparedStatement) connection.prepareStatement(
-							"Select name_of_provider, provider_pass from providers where name_of_provider=? and provider_pass=?");
-
-					st.setString(1, userName);
-					st.setString(2, passWord);
-					ResultSet rs = st.executeQuery();
-
-					if (rs.next()) {
+					JdbcProviderServices service = new JdbcProviderServices();
+					service.jdbcProvLogin(userName, passWord);
+					if (service.jdbcProvLogin(userName, passWord) != false) {
 						dispose();
-						ProviderHomeUI ah = new ProviderHomeUI(userName);
-						ah.setTitle("Welcome" + " " + userName);
-						ah.setVisible(true);
-						JOptionPane.showMessageDialog(RegisterBtn, "You have successfully logged in as admin");
+						ProviderHomeUI obj = new ProviderHomeUI(userName);
+						obj.setTitle("Welcome" + " " + userName);
+						obj.setVisible(true);
+						JOptionPane.showMessageDialog(LoginBtn, "You have successfully logged in as Admin/Provider");
 					} else {
-						JOptionPane.showMessageDialog(RegisterBtn, "Wrong Username & Password");
+						JOptionPane.showMessageDialog(LoginBtn, "Wrong Username or Password");
 					}
 
 				} catch (SQLException sqlException) {
@@ -117,9 +107,9 @@ public class ProviderLoginUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				driverdemo.Login d = new driverdemo.Login();
-				d.setTitle("Welcome back to the main menu");
-				d.setVisible(true);
+				driverdemo.Login obj = new driverdemo.Login();
+				obj.setTitle("Welcome back to the main menu");
+				obj.setVisible(true);
 			}
 		});
 		MainMenuBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -131,9 +121,9 @@ public class ProviderLoginUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				CustomerRegisterUI c = new CustomerRegisterUI();
-				c.setTitle("Welcome to registration");
-				c.setVisible(true);
+				ProviderRegisterUI obj = new ProviderRegisterUI();
+				obj.setTitle("Welcome to registration");
+				obj.setVisible(true);
 			}
 		});
 		RegisterBtn.setFont(new Font("Tahoma", Font.PLAIN, 26));
