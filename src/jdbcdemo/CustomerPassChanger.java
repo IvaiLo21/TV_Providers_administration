@@ -1,6 +1,7 @@
 package jdbcdemo;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,9 +54,12 @@ public class CustomerPassChanger extends JFrame {
 
 					JOptionPane.showMessageDialog(btnSearch, "Password has been successfully changed");
 					System.out.println("update customer_pass of " + name);
-
+					dispose();
 				} catch (SQLException sqlException) {
-					sqlException.printStackTrace();
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame,
+							sqlException.getMessage() + " Only digits allowed for password", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 			}

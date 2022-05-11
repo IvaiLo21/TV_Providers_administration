@@ -52,6 +52,7 @@ public class ProviderServiceChanger extends JFrame {
 
 					JOptionPane.showMessageDialog(btnSearch, "The Service Cost has been successfully changed");
 					System.out.println("update service cost of " + name);
+					dispose();
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

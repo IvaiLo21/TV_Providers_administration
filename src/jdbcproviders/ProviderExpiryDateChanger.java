@@ -56,7 +56,7 @@ public class ProviderExpiryDateChanger extends JFrame {
 
 					JOptionPane.showMessageDialog(btnSearch, "Contract Date has been successfully changed");
 					System.out.println("Update Contract Expiry Date of " + name);
-
+					dispose();
 				} catch (MysqlDataTruncation Excp) {
 					Component frame = null;
 					JOptionPane.showMessageDialog(frame, Excp.getMessage() + " Should be like this : YY-MM-DD", "Error",

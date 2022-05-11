@@ -54,7 +54,7 @@ public class CustomerAddressChanger extends JFrame {
 
 					JOptionPane.showMessageDialog(btnSearch, "Address has been successfully changed");
 					System.out.println("update customer address of " + name);
-
+					dispose();
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

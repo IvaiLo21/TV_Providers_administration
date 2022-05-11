@@ -48,7 +48,7 @@ public class ProviderIncDcr extends JFrame {
 
 					JdbcProviderServices service = new JdbcProviderServices();
 					service.jdbcIncrDcrServices(input, name, b);
-
+					dispose();
 				} catch (SQLException sqlException) {
 					sqlException.printStackTrace();
 				}

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class LoadProperties {
 	public void LoadProps() throws Exception {
-		
+
 		FileInputStream fis = new FileInputStream("config.properties");
 		Properties p = new Properties();
 		p.load(fis);

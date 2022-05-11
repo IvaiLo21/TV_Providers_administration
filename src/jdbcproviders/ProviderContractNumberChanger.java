@@ -55,6 +55,7 @@ public class ProviderContractNumberChanger extends JFrame {
 					if (!service.exists) {
 						JOptionPane.showMessageDialog(btnSearch, "Contract Number has been successfully changed");
 						System.out.println("Update Contract Number of " + name);
+						dispose();
 					} else {
 						Component frame = null;
 						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",

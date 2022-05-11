@@ -11,9 +11,9 @@ CREATE TABLE providers (
     
     service_cost DOUBLE,
     
-    contract_number VARCHAR(15) NOT NULL UNIQUE,
+    service_contract_number VARCHAR(15) NOT NULL UNIQUE,
     
-    contract_expiry DATE
+    service_contract_expiry DATE
 );
 
 CREATE TABLE customers (
@@ -41,6 +41,10 @@ CREATE TABLE channels (
     
     channel_cost DOUBLE,
     
+    provider_contract_id INT NOT NULL,
+    CONSTRAINT FOREIGN KEY (provider_contract_id)
+        REFERENCES providers (id),
+    
     package_id INT NOT NULL UNIQUE,
     CONSTRAINT FOREIGN KEY (package_id)
         REFERENCES channel_package (id)
@@ -49,19 +53,17 @@ CREATE TABLE channels (
 CREATE TABLE contracts (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     
-    contract_package ENUM('1-pack', '2-pack', '3-pack', '4-pack', '5-pack', '6-pack', '7-pack'),
+    customer_contract_package ENUM('1-pack', '2-pack', '3-pack', '4-pack', '5-pack', '6-pack', '7-pack'),
     
-    contract_package_cost DOUBLE,
+    customer_contract_number VARCHAR(15) NOT NULL UNIQUE,
     
-    provider_contract INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (provider_contract)
-        REFERENCES providers (id),
+    customer_contract_expiry DATE,
         
-    customer_contract INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (customer_contract)
+    customer_contract_id INT NOT NULL ,
+    CONSTRAINT FOREIGN KEY (customer_contract_id)
         REFERENCES customers (id),
         
-	channel_package_id INT NOT NULL,
+	channel_package_id INT NOT NULL ,
     CONSTRAINT FOREIGN KEY (channel_package_id)
 		REFERENCES channel_package (id)
 );
@@ -70,7 +72,7 @@ CREATE TABLE taxes (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     monthly_paid DOUBLE ,
     
-    customer_taxes INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (customer_taxes)
-        REFERENCES customers (id)
+    contract_taxes_id INT NOT NULL,
+    CONSTRAINT FOREIGN KEY (contract_taxes_id)
+        REFERENCES contracts (id)
 );

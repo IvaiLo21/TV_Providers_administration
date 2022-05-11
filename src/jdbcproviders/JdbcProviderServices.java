@@ -30,7 +30,7 @@ public class JdbcProviderServices {
 		Connection con = DriverManager.getConnection(url, user, pass);
 
 		PreparedStatement st = con.prepareStatement("insert into providers"
-				+ "(name_of_provider,provider_pass,service_cost,contract_number,contract_expiry)"
+				+ "(name_of_provider,provider_pass,service_cost,service_contract_number,service_contract_expiry)"
 				+ " values (?,?,?,?,?)");
 
 		try {
@@ -109,7 +109,8 @@ public class JdbcProviderServices {
 	public void jdbcEDateServices(String input, String name) throws SQLException {
 		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = con.prepareStatement("Update providers set contract_expiry=? where name_of_provider=?");
+		PreparedStatement st = con
+				.prepareStatement("Update providers set service_contract_expiry=? where name_of_provider=?");
 
 		st.setString(1, input);
 		st.setString(2, name);
@@ -121,7 +122,8 @@ public class JdbcProviderServices {
 		exists = false;
 		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = con.prepareStatement("Update providers set contract_number=? where name_of_provider=?");
+		PreparedStatement st = con
+				.prepareStatement("Update providers set service_contract_number=? where name_of_provider=?");
 
 		try {
 			st.setString(1, input);
