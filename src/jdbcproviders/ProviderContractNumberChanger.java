@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 //import java.sql.PreparedStatement;
 //import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,7 +52,7 @@ public class ProviderContractNumberChanger extends JFrame {
 					JdbcProviderServices service = new JdbcProviderServices();
 					service.jdbcCntrNumbServices(input, name);
 
-					if (service.exists == false) {
+					if (!service.exists) {
 						JOptionPane.showMessageDialog(btnSearch, "Contract Number has been successfully changed");
 						System.out.println("Update Contract Number of " + name);
 					} else {

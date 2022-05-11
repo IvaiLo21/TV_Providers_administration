@@ -2,17 +2,19 @@ package jdbcdemo;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 public class CustomerHomeUI extends JFrame {
 
@@ -21,7 +23,7 @@ public class CustomerHomeUI extends JFrame {
 
 	public CustomerHomeUI(String userSes) {
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(450, 190, 1014, 597);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -35,6 +37,7 @@ public class CustomerHomeUI extends JFrame {
 		LogoutBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		LogoutBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		LogoutBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				int action = JOptionPane.showConfirmDialog(LogoutBtn, "Are you sure?");
@@ -53,11 +56,13 @@ public class CustomerHomeUI extends JFrame {
 		JButton ChngUserBtn = new JButton("Change Username");
 		ChngUserBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		ChngUserBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				CustomerNameChanger obj = new CustomerNameChanger(userSes);
 				obj.setTitle("Change Username");
 				obj.setVisible(true);
-
+				dispose();
 			}
 		});
 		ChngUserBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -69,6 +74,7 @@ public class CustomerHomeUI extends JFrame {
 		JButton CPassBtn = new JButton("Change Password\r\n");
 		CPassBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		CPassBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				CustomerPassChanger obj = new CustomerPassChanger(userSes);
 				obj.setTitle("Change Password");
@@ -82,8 +88,9 @@ public class CustomerHomeUI extends JFrame {
 
 		// CHANGE ADDRESS
 		JButton ChngAddressBtn = new JButton("Change Address");
-		ChngAddressBtn.setBackground(UIManager.getColor("Button.background"));
+		ChngAddressBtn.setBackground(UIManager.getColor("Button.disabledForeground"));
 		ChngAddressBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				CustomerAddressChanger obj = new CustomerAddressChanger(userSes);
 				obj.setTitle("Change Address");

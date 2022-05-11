@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -28,7 +27,7 @@ public class JdbcProviderServices {
 		exists = false;
 		dateC = false;
 
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
 		PreparedStatement st = con.prepareStatement("insert into providers"
 				+ "(name_of_provider,provider_pass,service_cost,contract_number,contract_expiry)"
@@ -53,10 +52,9 @@ public class JdbcProviderServices {
 
 	// Provider User name Services
 	public void jdbcUsernameServices(String input, String name) throws SQLException {
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con
-				.prepareStatement("Update providers set name_of_provider=? where name_of_provider=?");
+		PreparedStatement st = con.prepareStatement("Update providers set name_of_provider=? where name_of_provider=?");
 
 		st.setString(1, input);
 		st.setString(2, name);
@@ -66,10 +64,10 @@ public class JdbcProviderServices {
 	// Provider Increase / Decrease Services
 	public void jdbcIncrDcrServices(String input, String name, boolean b) throws SQLException {
 
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
 		java.sql.CallableStatement myStmt = null;
-		if (b == true) {
+		if (b) {
 			myStmt = con.prepareCall("{call increase_cost_of_services(?, ?)}");
 			System.out
 					.println("Calling stored procedure Increase_cost_of_services('" + name + "', " + input + "%" + ")");
@@ -87,10 +85,9 @@ public class JdbcProviderServices {
 
 	// Provider Pass Changer Services
 	public void jdbcPassServices(String input, String name) throws SQLException {
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con
-				.prepareStatement("Update providers set provider_pass=? where name_of_provider=?");
+		PreparedStatement st = con.prepareStatement("Update providers set provider_pass=? where name_of_provider=?");
 
 		st.setString(1, input);
 		st.setString(2, name);
@@ -99,10 +96,9 @@ public class JdbcProviderServices {
 
 	// Provider Cost Services
 	public void jdbcCostServices(String input, String name) throws SQLException {
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con
-				.prepareStatement("Update providers set service_cost=? where name_of_provider=?");
+		PreparedStatement st = con.prepareStatement("Update providers set service_cost=? where name_of_provider=?");
 
 		st.setString(1, input);
 		st.setString(2, name);
@@ -111,10 +107,9 @@ public class JdbcProviderServices {
 
 	// Provider Expiry Date Services
 	public void jdbcEDateServices(String input, String name) throws SQLException {
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con
-				.prepareStatement("Update providers set contract_expiry=? where name_of_provider=?");
+		PreparedStatement st = con.prepareStatement("Update providers set contract_expiry=? where name_of_provider=?");
 
 		st.setString(1, input);
 		st.setString(2, name);
@@ -124,10 +119,9 @@ public class JdbcProviderServices {
 	// Provider Contract Number Services
 	public void jdbcCntrNumbServices(String input, String name) throws SQLException {
 		exists = false;
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con
-				.prepareStatement("Update providers set contract_number=? where name_of_provider=?");
+		PreparedStatement st = con.prepareStatement("Update providers set contract_number=? where name_of_provider=?");
 
 		try {
 			st.setString(1, input);
@@ -142,9 +136,9 @@ public class JdbcProviderServices {
 
 	// Provider Login Services
 	public boolean jdbcProvLogin(String userName, String passWord) throws SQLException {
-		Connection con = (Connection) DriverManager.getConnection(url, user, pass);
+		Connection con = DriverManager.getConnection(url, user, pass);
 
-		PreparedStatement st = (PreparedStatement) con.prepareStatement(
+		PreparedStatement st = con.prepareStatement(
 				"Select name_of_provider, provider_pass from providers where name_of_provider=? and provider_pass=?");
 
 		st.setString(1, userName);

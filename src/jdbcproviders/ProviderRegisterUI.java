@@ -21,10 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-
-import javax.swing.SwingConstants;
 
 public class ProviderRegisterUI extends JFrame {
 
@@ -114,17 +113,17 @@ public class ProviderRegisterUI extends JFrame {
 					JdbcProviderServices service = new JdbcProviderServices();
 					service.jdbcProvRegister(userName, passWord, serviceC, number, date);
 
-					if (service.exists != true && service.dateC != true) {
+					if (!service.exists && !service.dateC) {
 						dispose();
 						ProviderHomeUI obj = new ProviderHomeUI(userName);
 						obj.setTitle("Welcome" + " " + userName);
 						obj.setVisible(true);
 						JOptionPane.showMessageDialog(MainMenuBtn, "You successfully registered");
-					} else if (service.exists == true) {
+					} else if (service.exists) {
 						JOptionPane.showMessageDialog(frame, "Found " + JdbcProviderServices.msg, "Error",
 								JOptionPane.ERROR_MESSAGE);
 						service.exists = false;
-					} else if (service.dateC == true) {
+					} else if (service.dateC) {
 						JOptionPane.showMessageDialog(frame,
 								JdbcProviderServices.msg + " Should be like this : YY-MM-DD", "Error",
 								JOptionPane.ERROR_MESSAGE);

@@ -1,20 +1,19 @@
 package driverdemo;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 public class Login extends JFrame {
 
@@ -23,6 +22,7 @@ public class Login extends JFrame {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Login frame = new Login();
@@ -37,7 +37,7 @@ public class Login extends JFrame {
 	public Login() {
 		setResizable(false);
 		setTitle("TVM_App");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.SwingConstants;
 
 public class CustomerRegisterUI extends JFrame {
 
@@ -101,7 +101,7 @@ public class CustomerRegisterUI extends JFrame {
 					JdbcCustomerServices service = new JdbcCustomerServices();
 					service.jdbcCustomerReg(userName, passWord, address);
 
-					if (service.check == true) {
+					if (service.check) {
 
 						dispose();
 						CustomerHomeUI obj = new CustomerHomeUI(userName);

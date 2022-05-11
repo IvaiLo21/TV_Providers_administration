@@ -81,7 +81,7 @@ public class CustomerLoginUI extends JFrame {
 				try {
 					JdbcCustomerServices service = new JdbcCustomerServices();
 					service.jdbcCustomerLog(userName, passWord);
-					if (service.jdbcCustomerLog(userName, passWord) != false) {
+					if (service.jdbcCustomerLog(userName, passWord)) {
 						dispose();
 						CustomerHomeUI obj = new CustomerHomeUI(userName);
 						obj.setTitle("Welcome" + " " + userName);

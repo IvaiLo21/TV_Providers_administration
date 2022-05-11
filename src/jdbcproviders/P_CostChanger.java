@@ -45,11 +45,11 @@ public class P_CostChanger extends JFrame {
 
 				try {
 					String pstr = textField.getText();
-					Connection con = (Connection) DriverManager.getConnection(
+					Connection con = DriverManager.getConnection(
 							"jdbc:mysql://localhost:3306/tv_provider_administration", "root", "student1");
 
 					java.sql.CallableStatement myStmt = null;
-					if (b == true) {
+					if (b) {
 						myStmt = con.prepareCall("{call increase_cost_of_services(?, ?)}");
 						System.out.println("Calling stored procedure Increase_cost_of_services('" + name + "', " + pstr
 								+ "%" + ")");

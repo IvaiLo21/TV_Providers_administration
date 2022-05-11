@@ -2,6 +2,8 @@ package jdbcproviders;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /*import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,10 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ProviderLoginUI extends JFrame {
 
@@ -33,7 +33,7 @@ public class ProviderLoginUI extends JFrame {
 	public ProviderLoginUI() {
 		setResizable(false);
 		setTitle("AdminLogin");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(450, 190, 1014, 597);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,7 +82,7 @@ public class ProviderLoginUI extends JFrame {
 				try {
 					JdbcProviderServices service = new JdbcProviderServices();
 					service.jdbcProvLogin(userName, passWord);
-					if (service.jdbcProvLogin(userName, passWord) != false) {
+					if (service.jdbcProvLogin(userName, passWord)) {
 						dispose();
 						ProviderHomeUI obj = new ProviderHomeUI(userName);
 						obj.setTitle("Welcome" + " " + userName);

@@ -7,12 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 public class ProviderHomeUI extends JFrame {
 
@@ -22,7 +23,7 @@ public class ProviderHomeUI extends JFrame {
 	public ProviderHomeUI(String userSes1) {
 		setTitle("Admin_Home_Page");
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(450, 190, 1014, 597);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -36,6 +37,7 @@ public class ProviderHomeUI extends JFrame {
 		btnNewButton.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int a = JOptionPane.showConfirmDialog(btnNewButton, "Are you sure?");
 				if (a == JOptionPane.YES_OPTION) {
@@ -53,6 +55,7 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnChngPassword = new JButton("Change Password\r\n");
 		btnChngPassword.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnChngPassword.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderPassChanger obj = new ProviderPassChanger(userSes1);
 				obj.setTitle("Change Password");
@@ -68,6 +71,7 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnIncrease = new JButton("Increase S Cost");
 		btnIncrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnIncrease.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderIncDcr obj = new ProviderIncDcr(userSes1, true);
 				obj.setTitle("Increase Service Cost");
@@ -83,6 +87,7 @@ public class ProviderHomeUI extends JFrame {
 		JButton btnDecrease = new JButton("Decrease S cost");
 		btnDecrease.setBackground(UIManager.getColor("Button.disabledForeground"));
 		btnDecrease.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderIncDcr obj = new ProviderIncDcr(userSes1, false);
 				obj.setTitle("Decrease Service Cost");
@@ -97,7 +102,9 @@ public class ProviderHomeUI extends JFrame {
 		// CHANGE USERNAME
 		JButton btnChangeUsername = new JButton("Change Username");
 		btnChangeUsername.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				ProviderNameChanger obj = new ProviderNameChanger(userSes1);
 				obj.setTitle("Change Username");
 				obj.setVisible(true);
@@ -112,6 +119,7 @@ public class ProviderHomeUI extends JFrame {
 		// CHANGE SERVICE COST
 		JButton btnChangeaddSCost = new JButton("Change/Add Service Cost");
 		btnChangeaddSCost.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderServiceChanger obj = new ProviderServiceChanger(userSes1);
 				obj.setTitle("Change/Add Service Cost");
@@ -127,6 +135,7 @@ public class ProviderHomeUI extends JFrame {
 		// CHANGE CONTRACT NUMBER
 		JButton btnChangeaddContractNumber = new JButton("Change/Add Contract Number");
 		btnChangeaddContractNumber.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderContractNumberChanger obj = new ProviderContractNumberChanger(userSes1);
 				obj.setTitle("Change/Add Contract Number");
@@ -149,6 +158,7 @@ public class ProviderHomeUI extends JFrame {
 		// CHANGE CONTRACT DATE
 		JButton btnChangeaddContractExpiry = new JButton("Change/Add Contract Expiry Date");
 		btnChangeaddContractExpiry.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ProviderExpiryDateChanger obj = new ProviderExpiryDateChanger(userSes1);
 				obj.setTitle("Change/Add Expiry Date");
